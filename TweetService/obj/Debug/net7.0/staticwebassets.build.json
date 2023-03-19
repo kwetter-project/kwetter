@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "DVJkTA7QOAPIZSG5TO/YueiisKBvO3+lsvr1KCEj1tA=",
+  "Source": "TweetService",
+  "BasePath": "_content/TweetService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
