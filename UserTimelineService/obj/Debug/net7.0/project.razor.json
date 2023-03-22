@@ -1,6 +1,6 @@
 {
-  "SerializedFilePath": "d:\\kwetter\\TweetService\\obj\\Debug\\net7.0\\project.razor.json",
-  "FilePath": "d:\\kwetter\\TweetService\\TweetService.csproj",
+  "SerializedFilePath": "d:\\kwetter\\UserTimelineService\\obj\\Debug\\net7.0\\project.razor.json",
+  "FilePath": "d:\\kwetter\\UserTimelineService\\UserTimelineService.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "7.0",
@@ -18642,7 +18642,7 @@
     ],
     "CSharpLanguageVersion": 1100
   },
-  "RootNamespace": "TweetService",
+  "RootNamespace": "UserTimelineService",
   "Documents": [],
   "SerializationFormat": "0.3"
 }
