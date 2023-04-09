@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TweetService.Data;
 using TweetService.Dtos;
 using TweetService.Models;
+using TweetService.SyncDataServices.Http;
 
 namespace TweetService.Controllers
 {
@@ -12,11 +13,13 @@ namespace TweetService.Controllers
     {
         private readonly ITweetRepo _repository;
         private readonly IMapper _mapper;
+        private readonly IUserTimelineDataClient _utDataClient;
 
-        public TweetController(ITweetRepo repository, IMapper mapper)
+        public TweetController(ITweetRepo repository, IMapper mapper, IUserTimelineDataClient utDataClient)
         {
             _repository = repository;
             _mapper = mapper;
+            _utDataClient = utDataClient;
         }
         [HttpGet]
         public ActionResult<IEnumerable<TweetReadDto>> GetTweets()
@@ -36,12 +39,20 @@ namespace TweetService.Controllers
             return NotFound();
         }
         [HttpPost]
-        public ActionResult<TweetReadDto> CreateTweet(TweetCreateDto tweetCreateDto)
+        public async Task<ActionResult<TweetReadDto>> CreateTweet(TweetCreateDto tweetCreateDto)
         {
             var tweetModel = _mapper.Map<Tweet>(tweetCreateDto);
             _repository.CreateTweet(tweetModel);
             _repository.SaveChanges();
             var tweetReadDto = _mapper.Map<TweetReadDto>(tweetModel);
+            try
+            {
+                await _utDataClient.SendTweetToUserTimeline(tweetReadDto);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"--> Could not send synchronously: {ex.Message}");
+            }
             return CreatedAtRoute(nameof(GetTweetById), new { Id = tweetReadDto.Id }, tweetReadDto);
         }
     }

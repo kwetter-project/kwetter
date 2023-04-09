@@ -1,16 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using TweetService.Data;
+using TweetService.SyncDataServices.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
 builder.Services.AddScoped<ITweetRepo, TweetRepo>();
+builder.Services.AddHttpClient<IUserTimelineDataClient, HttpUserTimelineDataClient>();
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+Console.WriteLine($"--> User timeline service endpoint {builder.Configuration["UserTimelineService"]}");
 
 var app = builder.Build();
 
