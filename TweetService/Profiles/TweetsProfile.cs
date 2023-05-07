@@ -11,6 +11,7 @@ namespace TweetService.Profiles
             // Source -> Target
             CreateMap<Tweet, TweetReadDto>();
             CreateMap<TweetCreateDto, Tweet>();
+            CreateMap<TweetReadDto, TweetPublishedDto>();
         }
     }
 }

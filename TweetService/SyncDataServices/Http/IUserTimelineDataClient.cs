@@ -2,8 +2,8 @@ using TweetService.Dtos;
 
 namespace TweetService.SyncDataServices.Http
 {
-    public interface IUserTimelineDataClient
+    public interface INewsFeedDataClient
     {
-        Task SendTweetToUserTimeline(TweetReadDto tweet);
+        Task SendTweetToNewsFeed(TweetReadDto tweet);
     }
 }

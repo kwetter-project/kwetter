@@ -6,22 +6,22 @@ using TweetService.Dtos;
 
 namespace TweetService.SyncDataServices.Http
 {
-    public class HttpUserTimelineDataClient : IUserTimelineDataClient
+    public class HttpNewsFeedDataClient : INewsFeedDataClient
     {
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
-        public HttpUserTimelineDataClient(HttpClient httpClient, IConfiguration configuration)
+        public HttpNewsFeedDataClient(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
             _configuration = configuration;
         }
-        public async Task SendTweetToUserTimeline(TweetReadDto tweet)
+        public async Task SendTweetToNewsFeed(TweetReadDto tweet)
         {
             var httpContent = new StringContent(
                 JsonSerializer.Serialize(tweet),
                 Encoding.UTF8,
                 "application/json");
-            var response = await _httpClient.PostAsync($"{_configuration["UserTimelineService"]}", httpContent);
+            var response = await _httpClient.PostAsync($"{_configuration["NewsFeedService"]}", httpContent);
 
             if (response.IsSuccessStatusCode)
             {

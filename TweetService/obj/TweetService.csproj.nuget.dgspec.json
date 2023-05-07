@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\kwetter\\TweetService\\TweetService.csproj": {}
+    "D:\\kwetter\\tweetservice\\TweetService.csproj": {}
   },
   "projects": {
-    "D:\\kwetter\\TweetService\\TweetService.csproj": {
+    "D:\\kwetter\\tweetservice\\TweetService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\kwetter\\TweetService\\TweetService.csproj",
+        "projectUniqueName": "D:\\kwetter\\tweetservice\\TweetService.csproj",
         "projectName": "TweetService",
-        "projectPath": "D:\\kwetter\\TweetService\\TweetService.csproj",
+        "projectPath": "D:\\kwetter\\tweetservice\\TweetService.csproj",
         "packagesPath": "C:\\Users\\dea\\.nuget\\packages\\",
-        "outputPath": "D:\\kwetter\\TweetService\\obj\\",
+        "outputPath": "D:\\kwetter\\tweetservice\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -68,6 +68,10 @@
             "Microsoft.EntityFrameworkCore.SQLServer": {
               "target": "Package",
               "version": "[7.0.4, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.5.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

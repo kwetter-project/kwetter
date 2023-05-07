@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using TweetService.AsyncDataServices;
 using TweetService.Data;
 using TweetService.Dtos;
 using TweetService.Models;
@@ -13,13 +14,15 @@ namespace TweetService.Controllers
     {
         private readonly ITweetRepo _repository;
         private readonly IMapper _mapper;
-        private readonly IUserTimelineDataClient _utDataClient;
+        private readonly INewsFeedDataClient _utDataClient;
+        private readonly IMessageBusClient _messageBusClient;
 
-        public TweetController(ITweetRepo repository, IMapper mapper, IUserTimelineDataClient utDataClient)
+        public TweetController(ITweetRepo repository, IMapper mapper, INewsFeedDataClient utDataClient, IMessageBusClient messageBusClient)
         {
             _repository = repository;
             _mapper = mapper;
             _utDataClient = utDataClient;
+            _messageBusClient = messageBusClient;
         }
         [HttpGet]
         public ActionResult<IEnumerable<TweetReadDto>> GetTweets()
@@ -45,14 +48,29 @@ namespace TweetService.Controllers
             _repository.CreateTweet(tweetModel);
             _repository.SaveChanges();
             var tweetReadDto = _mapper.Map<TweetReadDto>(tweetModel);
+
+            // Send Sync Message
             try
             {
-                await _utDataClient.SendTweetToUserTimeline(tweetReadDto);
+                await _utDataClient.SendTweetToNewsFeed(tweetReadDto);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"--> Could not send synchronously: {ex.Message}");
             }
+
+            // Send Async Message
+            try
+            {
+                var tweetPublishedDto = _mapper.Map<TweetPublishedDto>(tweetReadDto);
+                tweetPublishedDto.Event = "Tweet_Published";
+                _messageBusClient.PublishNewTweet(tweetPublishedDto);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"--> Could not send asynchronously: {ex.Message}");
+            }
+
             return CreatedAtRoute(nameof(GetTweetById), new { Id = tweetReadDto.Id }, tweetReadDto);
         }
     }

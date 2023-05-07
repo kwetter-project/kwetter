@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "WQKs3r3EYF9jGvQqBfzIfKi38GqjpEu62JIDQ8+yc8A=",
+  "Source": "NewsFeedService",
+  "BasePath": "_content/NewsFeedService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
