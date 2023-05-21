@@ -30,16 +30,29 @@ namespace TweetService.Data
             {
                 Console.WriteLine("--> Seeding Data...");
                 context.Tweets.AddRange(
-                    new Tweet() { Message = "Dot Net", User = "Microsoft", Like = 0, DateTime = "12/10/2022" },
-                    new Tweet() { Message = "My First Tweet", User = "Bob", Like = 0, DateTime = "19/03/2021" },
-                    new Tweet() { Message = "How Why When", User = "Tim", Like = 0, DateTime = "01/01/2023" },
-                    new Tweet() { Message = "Test", User = "Mia", Like = 0, DateTime = "5/09/2023" }
+                    new Tweet() { Username = "Bob1023", Type = "Tweet", Content = "Today is Monday.", CreatedAt = DateTime.Now.AddHours(-12) },
+                    new Tweet() { Username = "ToM_B", Type = "Retweet", Content = "1", CreatedAt = DateTime.Now.AddHours(-2) },
+                    new Tweet() { Username = "Business_A", Type = "Ads", Content = "New Product" },
+                    new Tweet() { Username = "Mary000", Type = "Tweet", Content = "Today is Thursday.", CreatedAt = DateTime.Now.AddHours(-22) }
                 );
                 context.SaveChanges();
             }
             else
             {
-                Console.WriteLine("--> We already have data");
+                Console.WriteLine("--> We already have tweet data");
+            }
+            if (!context.Likes.Any())
+            {
+                Console.WriteLine("--> Seeding Data...");
+                context.Likes.AddRange(
+                    new Like() { Username = "Bob1023", TweetId = 1, CreatedAt = DateTime.Now.AddHours(-1) },
+                    new Like() { Username = "ToM_B", TweetId = 1, CreatedAt = DateTime.Now.AddHours(-2) }
+                );
+                context.SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine("--> We already have Like data");
             }
         }
     }

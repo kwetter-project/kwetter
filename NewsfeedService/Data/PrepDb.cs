@@ -14,6 +14,7 @@ namespace NewsFeedService.Data
         }
         private static void SeedData(AppDbContext context, bool isProd)
         {
+            //isProd = true;
             if (isProd)
             {
                 Console.WriteLine("--> Attempting to apply migration...");
@@ -28,31 +29,18 @@ namespace NewsFeedService.Data
             }
             if (!context.NewsFeeds.Any())
             {
-                Console.WriteLine("--> Seeding Data...");
+                Console.WriteLine("--> Seeding Data tweet...");
                 context.Tweets.AddRange(
-                    new Tweet() { Message = "Dot Net" },
-                    new Tweet() { Message = "My First Tweet" },
-                    new Tweet() { Message = "How Why When" }
-                );
-                context.NewsFeeds.AddRange(
-                    new NewsFeed()
-                    {
-                        UpdatedAt = "19/03/2021"
-                    },
-                    new NewsFeed()
-                    {
-                        UpdatedAt = "20/03/2021"
-                    },
-                    new NewsFeed()
-                    {
-                        UpdatedAt = "22/03/2021"
-                    }
+                    new Tweet() { Username = "Bob1023", Type = "Tweet", Content = "Today is Monday.", CreatedAt = DateTime.Now.AddHours(-12) },
+                    new Tweet() { Username = "ToM_B", Type = "Retweet", Content = "1", CreatedAt = DateTime.Now.AddHours(-2) },
+                    new Tweet() { Username = "Business_A", Type = "Ads", Content = "New Product" },
+                    new Tweet() { Username = "Mary000", Type = "Tweet", Content = "Today is Thursday.", CreatedAt = DateTime.Now.AddHours(-22) }
                 );
                 context.SaveChanges();
             }
             else
             {
-                Console.WriteLine("--> We already have data");
+                Console.WriteLine("--> We already have data tweet");
             }
         }
     }

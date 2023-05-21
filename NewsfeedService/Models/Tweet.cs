@@ -7,9 +7,17 @@ namespace NewsFeedService.Models
         [Required]
         public int Id { get; set; }
         [Required]
-        public int ExternalID { get; set; }
+        public string Username { get; set; }
         [Required]
-        public string Message { get; set; }
-        public ICollection<NewsFeed> NewsFeeds { get; set; } = new List<NewsFeed>();
+        public string Type { get; set; }
+        [Required]
+        public string Content { get; set; }
+        [Required]
+        public DateTime CreatedAt { get; set; }
+        public int Like { get; set; }
+
+        public int Retweet { get; set; }
+
+        public int Reply { get; set; }
     }
 }

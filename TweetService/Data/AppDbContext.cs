@@ -11,5 +11,7 @@ namespace TweetService.Data
         }
 
         public DbSet<Tweet> Tweets { get; set; }
+
+        public DbSet<Like> Likes { get; set; }
     }
 }

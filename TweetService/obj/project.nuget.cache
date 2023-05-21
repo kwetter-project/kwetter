@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "IrEZdxwJvbCywpw31vtgQd0XXvv68p3qF8aEOBB4UakOQF+OaEQF9j0+4QZRZGYQkOPWbuMm9qzco38qsC3RWw==",
+  "dgSpecHash": "4H041BmJJE+ioXW0CVnDzFiN6AvMO3DeKIoTKPNc3S/GPZ9CgoyxcajGG+mXR9F7om+zqsehc5i/tmlJl2ywQA==",
   "success": true,
   "projectFilePath": "D:\\kwetter\\tweetservice\\TweetService.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\dea\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\dea\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.5\\microsoft.aspnetcore.authentication.jwtbearer.7.0.5.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.3\\microsoft.aspnetcore.openapi.7.0.3.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

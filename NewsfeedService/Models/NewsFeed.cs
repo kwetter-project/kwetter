@@ -8,10 +8,10 @@ namespace NewsFeedService.Models
         [Required]
         public int Id { get; set; }
         [Required]
-        public string UpdatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
         [Required]
-        public int TweetID { get; set; }
-        public Tweet Tweet { get; set; }
+        public string Username { get; set; }
 
+        public ICollection<Tweet> Tweets { get; set; } = new List<Tweet>();
     }
 }

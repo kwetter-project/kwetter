@@ -7,12 +7,18 @@ namespace TweetService.Models
         [Required]
         public int Id { get; set; }
         [Required]
-        public string Message { get; set; }
+        public string Username { get; set; }
         [Required]
-        public string User { get; set; }
+        public string Type { get; set; }
         [Required]
-        public string DateTime { get; set; }
+        public string Content { get; set; }
+        [Required]
+        public DateTime CreatedAt { get; set; }
         public int Like { get; set; }
+
+        public int Retweet { get; set; }
+
+        public int Reply { get; set; }
 
     }
 }

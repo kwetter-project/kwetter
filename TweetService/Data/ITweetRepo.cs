@@ -8,5 +8,9 @@ namespace TweetService.Data
         IEnumerable<Tweet> GetAllTweets();
         Tweet GetTweetById(int id);
         void CreateTweet(Tweet tweet);
+        void DeleteTweet(int id);
+        void updateTweet(int tweetId, Tweet tweet);
+
+        List<Tweet> GetTweetsByName(string username);
     }
 }

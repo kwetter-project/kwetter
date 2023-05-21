@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+    sql-server:
+        image: mcr.microsoft.com/mssql/server:latest
+        environment:
+            ACCEPT_EULA: 'Y'
+            SA_PASSWORD: 'pa55w0rd!'
+        ports:
+        - 1433:1433
+
+    rabbitmq:
+        image: rabbitmq:3.11-management
+        container_name: rabbitmq
+        ports:
+        - 15672:15672
+        - 5672:5672
+        volumes:
+            - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+            - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq

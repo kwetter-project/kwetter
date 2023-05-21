@@ -20,6 +20,11 @@ namespace TweetService.Data
             _context.Tweets.Add(tweet);
         }
 
+        public void DeleteTweet(int id)
+        {
+            _context.Remove(_context.Tweets.Single(a => a.Id == id));
+        }
+
         public IEnumerable<Tweet> GetAllTweets()
         {
             return _context.Tweets.ToList();
@@ -34,6 +39,24 @@ namespace TweetService.Data
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
+        }
+
+        public List<Tweet> GetTweetsByName(string username)
+        {
+            return _context.Tweets.Where
+            (p => p.Username == username).ToList();
+        }
+
+        public void updateTweet(int tweetId, Tweet tweet)
+        {
+            Tweet tweetToUpdate = GetTweetById(tweetId);
+            if (tweetToUpdate != tweet)
+            {
+                _context.Tweets.Attach(tweet);
+                var entry = _context.Tweets.Entry(tweet);
+                entry.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            }
+
         }
     }
 }

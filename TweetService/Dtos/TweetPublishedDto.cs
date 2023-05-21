@@ -3,7 +3,18 @@ namespace TweetService.Dtos
     public class TweetPublishedDto
     {
         public int Id { get; set; }
-        public string Message { get; set; }
+        public string Username { get; set; }
+
+        public string Type { get; set; }
+
+        public string Content { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+        public int Like { get; set; }
+
+        public int Retweet { get; set; }
+
+        public int Reply { get; set; }
         public string Event { get; set; }
     }
 }

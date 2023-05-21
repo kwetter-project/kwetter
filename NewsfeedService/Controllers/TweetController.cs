@@ -1,12 +1,14 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NewsFeedService.Data;
 using NewsFeedService.Dtos;
 
 namespace NewsFeedService.Controllersctl
 {
-    [Route("api/ut/[controller]")]
+    [Route("api/[controller]/tw")]
     [ApiController]
+    [Authorize]
     public class TweetController : ControllerBase
     {
         private readonly INewsFeedRepo _repository;
@@ -23,12 +25,6 @@ namespace NewsFeedService.Controllersctl
             Console.WriteLine("--> Getting Tweets from NewsFeedService");
             var tweetItems = _repository.GetAllTweets();
             return Ok(_mapper.Map<IEnumerable<TweetReadDto>>(tweetItems));
-        }
-        [HttpPost]
-        public ActionResult TestInboundConnection()
-        {
-            Console.WriteLine(" --> Inbound Post #NewsFeed Service");
-            return Ok("Inbound test from tweet controller");
         }
     }
 }

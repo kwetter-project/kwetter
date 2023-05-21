@@ -1,3 +1,4 @@
+using NewsFeedService.Dtos;
 using NewsFeedService.Models;
 
 namespace NewsFeedService.Data
@@ -10,11 +11,16 @@ namespace NewsFeedService.Data
         IEnumerable<Tweet> GetAllTweets();
         void CreateTweet(Tweet tweet);
         bool TweetExist(int tweetId);
-        bool ExternalTweetExist(int externalTweetId);
+        void updateTweet(int tweetId, Tweet tweet);
+        Tweet GetTweetById(int id);
+        void DeleteTweet(int id);
+        List<Tweet> GetTweetsByName(string username);
+
 
         //newsfeed
-        IEnumerable<NewsFeed> GetNewsFeedsForTweet(int tweetId);
-        NewsFeed GetNewsFeed(int tweetId, int newsFeedId);
-        void CreateNewsFeed(int tweetId, NewsFeed newsFeed);
+        void CreateNewsFeed(string userName);
+        NewsFeedWithTweetsDto GetNewsFeedWithTweets(int newsFeedId);
+        void DeleteNewsFeed(int newsFeedId);
+        NewsFeed GetNewsFeedByUser(string userName);
     }
 }
