@@ -13,10 +13,10 @@ jobs:
         with:
           dotnet-version: 6.0.x
       - name: Install dependencies
-        working-directory: ./newsfeedservice
+        working-directory: newsfeedservice
         run: dotnet restore
       - name: Build
-        working-directory: ./newsfeedservice
+        working-directory: newsfeedservice
         run: dotnet build --configuration Release --no-restore
 
   build-user:
