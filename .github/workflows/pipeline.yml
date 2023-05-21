@@ -13,8 +13,9 @@ jobs:
         with:
           dotnet-version: 6.0.x
       - name: Install dependencies
-        working-directory: ${{ github.workspace }}/newsfeedservice
-        run: dotnet restore
+        run: |
+          cd newsfeedservice
+          dotnet restore
       - name: Build
         working-directory: ${{ github.workspace }}/newsfeedservice
         run: dotnet build --configuration Release --no-restore
