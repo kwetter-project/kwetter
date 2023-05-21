@@ -14,45 +14,47 @@ jobs:
           dotnet-version: 6.0.x
       - name: Install dependencies
         run: |
-          pwd
-          ls
           cd NewsfeedService
-          pwd
+          dotnet restore
       - name: Build
         working-directory: ${{ github.workspace }}/newsfeedservice
+        run: |
+          cd NewsfeedService
+          dotnet build --configuration Release --no-restore
+
+  build-user:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "6.0.x"
+      - name: Install dependencies
+        run: |
+          cd UserService
+          dotnet restore
+      - name: Build
+        run: |
+          cd UserService
+          dotnet build --configuration Release --no-restore
+      - name: Test
+        working-directory: UserService.Test/unittest
+        run: dotnet test --no-restore --verbosity normal
+
+  build-tweet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "6.0.x"
+      - name: Install dependencies
+        working-directory: TweetService
+        run: dotnet restore
+      - name: Build
+        working-directory: TweetService
         run: dotnet build --configuration Release --no-restore
-
-  # build-user:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Setup .NET Core SDK
-  #       uses: actions/setup-dotnet@v3
-  #       with:
-  #         dotnet-version: "6.0.x"
-  #     - name: Install dependencies
-  #       working-directory: userservice
-  #       run: dotnet restore
-  #     - name: Build
-  #       working-directory: userservice
-  #       run: dotnet build --configuration Release --no-restore
-  #     - name: Test
-  #       working-directory: userservice.test/unittest
-  #       run: dotnet test --no-restore --verbosity normal
-
-  # build-tweet:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Setup .NET Core SDK
-  #       uses: actions/setup-dotnet@v3
-  #       with:
-  #         dotnet-version: "6.0.x"
-  #     - name: Install dependencies
-  #       working-directory: tweetservice
-  #       run: dotnet restore
-  #     - name: Build
-  #       working-directory: tweetservice
-  #       run: dotnet build --configuration Release --no-restore
