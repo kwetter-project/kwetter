@@ -4,11 +4,10 @@ on: [push]
 
 jobs:
   build-newsfeed:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: [ '3.1.x', '6.0.x' ]
+        dotnet-version: ["3.1.x", "6.0.x"]
 
     steps:
       - uses: actions/checkout@v3
@@ -17,18 +16,17 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
-        working-directory: ./newsfeedservice
+        working-directory: newsfeedservice
         run: dotnet restore
       - name: Build
-        working-directory: ./newsfeedservice
+        working-directory: newsfeedservice
         run: dotnet build --configuration Release --no-restore
-    
-  build-user:
 
+  build-user:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: [ '3.1.x', '6.0.x' ]
+        dotnet-version: ["3.1.x", "6.0.x"]
 
     steps:
       - uses: actions/checkout@v3
@@ -37,21 +35,20 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
-        working-directory: ./userservice
+        working-directory: userservice
         run: dotnet restore
       - name: Build
-        working-directory: ./userservice
+        working-directory: userservice
         run: dotnet build --configuration Release --no-restore
       - name: Test
-        working-directory: ./userservice.test/unittest
+        working-directory: userservice.test/unittest
         run: dotnet test --no-restore --verbosity normal
-  
-  build-tweet:
 
+  build-tweet:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: [ '3.1.x', '6.0.x' ]
+        dotnet-version: ["3.1.x", "6.0.x"]
 
     steps:
       - uses: actions/checkout@v3
@@ -60,8 +57,8 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
-        working-directory: ./tweetservice
+        working-directory: tweetservice
         run: dotnet restore
       - name: Build
-        working-directory: ./tweetservice
+        working-directory: tweetservice
         run: dotnet build --configuration Release --no-restore
