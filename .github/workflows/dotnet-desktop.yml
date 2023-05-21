@@ -3,7 +3,7 @@ name: kwetter
 on: [push]
 
 jobs:
-  build:
+  build-newsfeed:
 
     runs-on: ubuntu-latest
     strategy:
@@ -17,8 +17,51 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
+        working-directory: ./newsfeedservice
         run: dotnet restore
       - name: Build
+        working-directory: ./newsfeedservice
+        run: dotnet build --configuration Release --no-restore
+    
+  build-user:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '3.1.x', '6.0.x' ]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - name: Install dependencies
+        working-directory: ./userservice
+        run: dotnet restore
+      - name: Build
+        working-directory: ./userservice
         run: dotnet build --configuration Release --no-restore
       - name: Test
+        working-directory: ./userservice.test/unittest
         run: dotnet test --no-restore --verbosity normal
+  
+  build-tweet:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '3.1.x', '6.0.x' ]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - name: Install dependencies
+        working-directory: ./tweetservice
+        run: dotnet restore
+      - name: Build
+        working-directory: ./tweetservice
+        run: dotnet build --configuration Release --no-restore
