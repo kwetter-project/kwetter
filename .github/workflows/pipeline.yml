@@ -16,6 +16,8 @@ jobs:
         run: |
           pwd
           ls
+          cd NewsfeedService
+          pwd
       - name: Build
         working-directory: ${{ github.workspace }}/newsfeedservice
         run: dotnet build --configuration Release --no-restore
