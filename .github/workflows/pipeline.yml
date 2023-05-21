@@ -16,10 +16,10 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
-        working-directory: ../newsfeedservice
+        working-directory: ./newsfeedservice
         run: dotnet restore
       - name: Build
-        working-directory: ../newsfeedservice
+        working-directory: ./newsfeedservice
         run: dotnet build --configuration Release --no-restore
 
   build-user:
