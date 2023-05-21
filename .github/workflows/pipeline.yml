@@ -5,16 +5,13 @@ on: [push]
 jobs:
   build-newsfeed:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: ["3.1.x", "6.0.x"]
 
     steps:
       - uses: actions/checkout@v3
-      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+      - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: 6.0.x
       - name: Install dependencies
         working-directory: ./newsfeedservice
         run: dotnet restore
@@ -24,16 +21,13 @@ jobs:
 
   build-user:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: ["3.1.x", "6.0.x"]
 
     steps:
       - uses: actions/checkout@v3
-      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+      - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: "6.0.x"
       - name: Install dependencies
         working-directory: userservice
         run: dotnet restore
@@ -46,16 +40,13 @@ jobs:
 
   build-tweet:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: ["3.1.x", "6.0.x"]
 
     steps:
       - uses: actions/checkout@v3
-      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+      - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: "6.0.x"
       - name: Install dependencies
         working-directory: tweetservice
         run: dotnet restore
