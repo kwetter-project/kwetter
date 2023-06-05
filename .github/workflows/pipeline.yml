@@ -58,7 +58,7 @@ jobs:
         working-directory: TweetService
         run: dotnet build --configuration Release --no-restore
 
-  analyze-newsfeed:
+  analyze:
     name: Build and analyze
     runs-on: windows-latest
     steps:
@@ -97,6 +97,16 @@ jobs:
         shell: powershell
         run: |
           cd NewsfeedService
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"rebekadea_kwetter" /o:"rebekadea" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet build
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          cd ..
+          cd UserService
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"rebekadea_kwetter" /o:"rebekadea" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet build
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          cd ..
+          cd TweetService
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"rebekadea_kwetter" /o:"rebekadea" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
