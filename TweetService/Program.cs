@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<ITweetRepo, TweetRepo>();
 builder.Services.AddScoped<ILikeRepo, LikeRepo>();
 builder.Services.AddSingleton<IMessageBusClient, MessageBusClient>();
+builder.Services.AddHostedService<MessageBusSubscriber>();
 builder.Services.AddSingleton<IEventProcessor, EventProcessor>();
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

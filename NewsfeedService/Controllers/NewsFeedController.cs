@@ -20,16 +20,47 @@ namespace NewsFeedService.Controllers
             _repository = repository;
             _mapper = mapper;
         }
-        [HttpPost] // id = userID
-        public ActionResult<string> CreateNewsFeedForTweet(string username)
+        [HttpGet("{id}", Name = "GetNewsfeedByUser")]
+        public ActionResult<NewsFeed> GetNewsfeedByUser(string id)
         {
-            Console.WriteLine($"--> Hit CreateNewsFeedForTweet");
+            var tweetItem = _repository.GetNewsFeedByUser(id);
+            if (tweetItem != null)
+            {
+                return Ok(tweetItem);
+            }
+            return NotFound();
+        }
+        [HttpPost]
+        public ActionResult<NewsFeed> CreateNewsFeed([FromForm] string username)
+        {
+            Console.WriteLine($"--> Hit CreateNewsFeed");
+            _repository.CreateNewsFeed(username);
+            _repository.SaveChanges();
+            var newsfeed = _repository.GetNewsFeedByUser(username);
+
+            return Ok(newsfeed);
+        }
+        [HttpPost("follow")] // id = userID
+        public ActionResult<string> Follow(string username)
+        {
+            Console.WriteLine($"--> Follow");
             _repository.CreateNewsFeed(username);
             _repository.SaveChanges();
 
-            return Ok(
-                "newsfeed created"
-            );
+            return Ok();
+        }
+        [HttpGet("allnewsfeed")]
+        public ActionResult<IEnumerable<NewsFeed>> GetNewsFeed()
+        {
+            Console.WriteLine("--> Getting Newsfeeds from NewsFeedService");
+            var nfItems = _repository.GetNewsFeed();
+            return Ok(nfItems);
+        }
+        [HttpGet("socialgraph")]
+        public ActionResult<IEnumerable<Follower>> GetsocialGraph()
+        {
+            var scItems = _repository.GetSocialGraph();
+            return Ok(scItems);
         }
     }
 }

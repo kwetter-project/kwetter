@@ -105,16 +105,20 @@ namespace TweetService.EventProcessing
                 try
                 {
                     var tweetToDelete = repo.GetTweetsByName(userDeletePublishedDto.Id);
-                    foreach (var twt in tweetToDelete)
+                    if (tweetToDelete != null)
                     {
-                        repo.DeleteTweet(twt.Id);
-                        repo.SaveChanges();
+                        foreach (var twt in tweetToDelete)
+                        {
+                            repo.DeleteTweet(twt.Id);
+                            repo.SaveChanges();
+                        }
                     }
+
                     Console.WriteLine("--> tweets associated with user deleted!");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"--> Could not delete newsfeed associated with user in db {ex.Message}");
+                    Console.WriteLine($"--> Could not delete tweets associated with user in db {ex.Message}");
                 }
             }
         }

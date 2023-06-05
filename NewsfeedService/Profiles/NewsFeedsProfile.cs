@@ -11,6 +11,8 @@ namespace NewsFeedService.Profiles
             CreateMap<Tweet, TweetReadDto>();
             CreateMap<NewsFeedCreateDto, NewsFeed>();
             CreateMap<NewsFeed, NewsFeedReadDto>();
+            CreateMap<Tweet, TweetDto>();
+            CreateMap<TweetPublishedDto, Tweet>();
             // CreateMap<TweetPublishedDto, Tweet>()
             //     .ForMember(dest => dest.ExternalID, opt => opt.MapFrom(src => src.Id));
         }

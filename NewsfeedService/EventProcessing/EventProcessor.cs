@@ -105,16 +105,24 @@ namespace NewsFeedService.EventProcessing
                 try
                 {
                     var nf = repo.GetNewsFeedByUser(userDeletePublishedDto.Id);
-                    repo.DeleteNewsFeed(nf.Id);
-                    repo.SaveChanges();
+                    if (nf != null)
+                    {
+                        repo.DeleteNewsFeed(nf.Id);
+                        repo.SaveChanges();
+                    }
+
                     Console.WriteLine("--> newsfeed associated with user deleted!");
 
                     var tweetToDelete = repo.GetTweetsByName(userDeletePublishedDto.Id);
-                    foreach (var twt in tweetToDelete)
+                    if (tweetToDelete != null)
                     {
-                        repo.DeleteTweet(twt.Id);
-                        repo.SaveChanges();
+                        foreach (var twt in tweetToDelete)
+                        {
+                            repo.DeleteTweet(twt.Id);
+                            repo.SaveChanges();
+                        }
                     }
+
                     Console.WriteLine("--> tweets associated with user deleted!");
                 }
                 catch (Exception ex)

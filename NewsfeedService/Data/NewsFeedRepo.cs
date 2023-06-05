@@ -23,15 +23,17 @@ namespace NewsFeedService.Data
         public void CreateNewsFeed(string userName)
         {
             var followers = _context.Followers.Where(c => c.FollowerName == userName).ToList();
+            Console.WriteLine("Followers: " + followers);
             var createFeed = new NewsFeed();
             createFeed.UpdatedAt = DateTime.UtcNow;
-
+            createFeed.Username = userName;
+            List<Tweet> tweets = new List<Tweet>();
             foreach (var follower in followers)
             {
                 var newsfeed = _context.Tweets.Where(c => c.Username == follower.FolloweeName).ToList();
-                createFeed.Tweets = newsfeed;
+                tweets.AddRange(newsfeed);
             }
-
+            createFeed.Tweets = tweets;
             var newsfeedExist = GetNewsFeedByUser(userName);
             if (newsfeedExist == null)
             {
@@ -95,7 +97,7 @@ namespace NewsFeedService.Data
                     Tweets = n.Tweets.Select(t => new TweetReadDto
                     {
                         Id = t.Id,
-                        Message = t.Content
+                        Content = t.Content
                     }).ToList()
                 })
                 .FirstOrDefault();
@@ -118,6 +120,47 @@ namespace NewsFeedService.Data
         {
             return _context.NewsFeeds.FirstOrDefault
             (p => p.Username == userName);
+        }
+
+        public void CreateFollow(Follower follower)
+        {
+            if (follower == null)
+            {
+                throw new ArgumentNullException(nameof(follower));
+            }
+            _context.Followers.Add(follower);
+        }
+
+        public void DeleteFollow(string follower, string followee)
+        {
+            _context.Remove(_context.Followers.Single(a => a.FolloweeName == followee && a.FollowerName == follower));
+        }
+
+        public int GetFollower(string username)
+        {
+            return _context.Followers.Count(f => f.FolloweeName == username);
+        }
+
+        public int GetFollowing(string username)
+        {
+            return _context.Followers.Count(f => f.FollowerName == username);
+        }
+
+        public List<NewsFeed> GetNewsFeed()
+        {
+            var newsFeeds = _context.NewsFeeds.ToList();
+
+            foreach (var newsFeed in newsFeeds)
+            {
+                _context.Entry(newsFeed).Collection(nf => nf.Tweets).Load();
+            }
+
+            return newsFeeds;
+        }
+
+        public List<Follower> GetSocialGraph()
+        {
+            return _context.Followers.ToList();
         }
     }
 }

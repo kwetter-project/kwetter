@@ -41,19 +41,19 @@ namespace TweetService.Data
             {
                 Console.WriteLine("--> We already have tweet data");
             }
-            if (!context.Likes.Any())
-            {
-                Console.WriteLine("--> Seeding Data...");
-                context.Likes.AddRange(
-                    new Like() { Username = "Bob1023", TweetId = 1, CreatedAt = DateTime.Now.AddHours(-1) },
-                    new Like() { Username = "ToM_B", TweetId = 1, CreatedAt = DateTime.Now.AddHours(-2) }
-                );
-                context.SaveChanges();
-            }
-            else
-            {
-                Console.WriteLine("--> We already have Like data");
-            }
+            // if (!context.Likes.Any())
+            // {
+            //     Console.WriteLine("--> Seeding Data...");
+            //     context.Likes.AddRange(
+            //         new Like() { Username = "Bob1023", TweetId = 1, CreatedAt = DateTime.Now.AddHours(-1) },
+            //         new Like() { Username = "ToM_B", TweetId = 1, CreatedAt = DateTime.Now.AddHours(-2) }
+            //     );
+            //     context.SaveChanges();
+            // }
+            // else
+            // {
+            //     Console.WriteLine("--> We already have Like data");
+            // }
         }
     }
 }

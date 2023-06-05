@@ -19,8 +19,16 @@ namespace NewsFeedService.Data
 
         //newsfeed
         void CreateNewsFeed(string userName);
+        List<NewsFeed> GetNewsFeed();
         NewsFeedWithTweetsDto GetNewsFeedWithTweets(int newsFeedId);
         void DeleteNewsFeed(int newsFeedId);
         NewsFeed GetNewsFeedByUser(string userName);
+
+        //following
+        void CreateFollow(Follower follower);
+        void DeleteFollow(string follower, string followee);
+        int GetFollower(string username);
+        int GetFollowing(string username);
+        List<Follower> GetSocialGraph();
     }
 }

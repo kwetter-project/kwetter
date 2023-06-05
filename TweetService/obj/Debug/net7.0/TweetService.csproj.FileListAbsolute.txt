@@ -79,3 +79,4 @@ D:\kwetter\TweetService\obj\Debug\net7.0\TweetService.genruntimeconfig.cache
 D:\kwetter\TweetService\obj\Debug\net7.0\ref\TweetService.dll
 D:\kwetter\tweetservice\bin\Debug\net7.0\appsettings.Production.json
 D:\kwetter\tweetservice\bin\Debug\net7.0\RabbitMQ.Client.dll
+D:\kwetter\tweetservice\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

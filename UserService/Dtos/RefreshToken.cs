@@ -1,10 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace UserService.Models
+namespace UserService.Dtos
 {
     public class RefreshToken
     {
         [Key]
+        [Required]
+        public int Id { get; set; }
         [Required]
         public string Token { get; set; } = string.Empty;
         [Required]

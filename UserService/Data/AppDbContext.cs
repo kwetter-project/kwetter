@@ -10,8 +10,6 @@ namespace UserService.Data
 
         }
 
-        public DbSet<RefreshToken> RefreshTokens { get; set; }
-
         public DbSet<User> Users { get; set; }
 
     }

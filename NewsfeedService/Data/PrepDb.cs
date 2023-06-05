@@ -27,7 +27,7 @@ namespace NewsFeedService.Data
                     Console.WriteLine($"--> Could not run migrations: {ex.Message}");
                 }
             }
-            if (!context.NewsFeeds.Any())
+            if (!context.Tweets.Any())
             {
                 Console.WriteLine("--> Seeding Data tweet...");
                 context.Tweets.AddRange(
@@ -41,6 +41,21 @@ namespace NewsFeedService.Data
             else
             {
                 Console.WriteLine("--> We already have data tweet");
+            }
+            if (!context.Followers.Any())
+            {
+                Console.WriteLine("--> Seeding Data follower...");
+                context.Followers.AddRange(
+                    new Follower() { FolloweeName = "Mary000", FollowerName = "ToM_B" },
+                    new Follower() { FolloweeName = "Business_A", FollowerName = "ToM_B" },
+                    new Follower() { FolloweeName = "Mary000", FollowerName = "Bob1023" },
+                    new Follower() { FolloweeName = "Mary000", FollowerName = "Business_A" }
+                );
+                context.SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine("--> We already have data follower");
             }
         }
     }

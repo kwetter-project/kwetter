@@ -29,7 +29,7 @@ namespace TweetService.AsyncDataServices
             };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
-            _channel.ExchangeDeclare(exchange: "user_exchange", type: ExchangeType.Direct);
+            //_channel.ExchangeDeclare(exchange: "user_exchange", type: ExchangeType.Fanout);
             _queueName = _channel.QueueDeclare().QueueName;
             _channel.QueueBind(queue: _queueName, exchange: "user_exchange", routingKey: "user_deletion");
             Console.WriteLine("--> Listening on the message bus...");

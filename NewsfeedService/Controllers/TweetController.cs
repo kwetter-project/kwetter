@@ -20,11 +20,11 @@ namespace NewsFeedService.Controllersctl
             _mapper = mapper;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<TweetReadDto>> GetTweets()
+        public ActionResult<IEnumerable<TweetDto>> GetTweets()
         {
             Console.WriteLine("--> Getting Tweets from NewsFeedService");
             var tweetItems = _repository.GetAllTweets();
-            return Ok(_mapper.Map<IEnumerable<TweetReadDto>>(tweetItems));
+            return Ok(_mapper.Map<IEnumerable<TweetDto>>(tweetItems));
         }
     }
 }

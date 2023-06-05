@@ -31,78 +31,6 @@ namespace UserService.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-        [HttpPost("update")]
-        public async Task<ActionResult<string>> UpdatePassword(UserUpdateDto request)
-        {
-            var user = _repo.GetUserById(request.Username);
-            if (!VerifyPasswordHash(request.OldPassword, user.PasswordHash, user.PasswordSalt))
-            {
-                return BadRequest("Wrong old password");
-            }
-            if (request.OldPassword == request.NewPassword)
-            {
-                return BadRequest("Please enter a different new password");
-            }
-            CreatePasswordHash(request.NewPassword, out byte[] passwordHash, out byte[] passwordSalt);
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-            _repo.updatePassword(user);
-            _repo.SaveChanges();
-            return Ok("password updated");
-
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<string>> DeleteUser(string id)
-        {
-            var user = _repo.GetUserById(id);
-            if (user == null)
-            {
-                return NotFound("User not found");
-            }
-
-            _repo.DeleteUser(id);
-            _repo.SaveChanges();
-
-
-            try
-            {
-                var tweetPublishedDto = new UserDeletePublishedDto();
-                tweetPublishedDto.Id = id;
-                tweetPublishedDto.Event = "User_Deleted";
-                _messageBusClient.PublishUserDeleted(tweetPublishedDto);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"--> Could not send asynchronously: {ex.Message}");
-            }
-
-            return Ok("User deleted");
-        }
-
-        [HttpPost("logout")]
-        public async Task<ActionResult<string>> Logout()
-        {
-            // Clear the refresh token from the user's session
-            string current_user = _httpContextAccessor.HttpContext.User.Identity.Name;
-            var user = _repo.GetUserById(current_user);
-            if (user == null)
-            {
-                return NotFound("User not found");
-            }
-
-            user.RefreshToken = null;
-            user.TokenCreated = DateTime.MinValue;
-            user.TokenExpires = DateTime.MinValue;
-            _repo.updateUserToken(user);
-            _repo.SaveChanges();
-
-            // Remove the refresh token from the response cookies
-            Response.Cookies.Delete("refreshToken");
-            await _httpContextAccessor.HttpContext.SignOutAsync();
-            return Ok("Logged out successfully");
-        }
-
         [HttpPost("register")]
         public async Task<ActionResult<User>> Register(UserDto request)
         {
@@ -142,6 +70,84 @@ namespace UserService.Controllers
 
             return Ok();
         }
+
+        [HttpPost("update")]
+        [Authorize]
+        public async Task<ActionResult<string>> UpdatePassword(UserUpdateDto request)
+        {
+            var user = _repo.GetUserById(request.Username);
+            if (!VerifyPasswordHash(request.OldPassword, user.PasswordHash, user.PasswordSalt))
+            {
+                return BadRequest("Wrong old password");
+            }
+            if (request.OldPassword == request.NewPassword)
+            {
+                return BadRequest("Please enter a different new password");
+            }
+            CreatePasswordHash(request.NewPassword, out byte[] passwordHash, out byte[] passwordSalt);
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+            _repo.updatePassword(user);
+            _repo.SaveChanges();
+            return Ok("password updated");
+
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<ActionResult<string>> DeleteUser(string id)
+        {
+            var user = _repo.GetUserById(id);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            _repo.DeleteUser(id);
+            _repo.SaveChanges();
+
+
+            try
+            {
+                var tweetPublishedDto = new UserDeletePublishedDto();
+                tweetPublishedDto.Id = id;
+                tweetPublishedDto.Event = "User_Deleted";
+                _messageBusClient.PublishUserDeleted(tweetPublishedDto);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"--> Could not send asynchronously: {ex.Message}");
+            }
+
+            return Ok("User deleted");
+        }
+
+        [HttpPost("logout")]
+        [Authorize]
+        public async Task<ActionResult<string>> Logout()
+        {
+            // Clear the refresh token from the user's session
+            string current_user = _httpContextAccessor.HttpContext.User.Identity.Name;
+            var user = _repo.GetUserById(current_user);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            user.RefreshToken = null;
+            user.TokenCreated = DateTime.MinValue;
+            user.TokenExpires = DateTime.MinValue;
+            _repo.updateUserToken(user);
+            _repo.SaveChanges();
+
+            // Remove the refresh token from the response cookies
+            Response.Cookies.Delete("refreshToken");
+            await _httpContextAccessor.HttpContext.SignOutAsync();
+            return Ok("Logged out successfully");
+        }
+
+
+
         private RefreshToken GenerateRefreshToken()
         {
             var refreshToken = new RefreshToken

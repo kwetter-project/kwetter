@@ -12,7 +12,7 @@ namespace UserService.Models
         [Required]
         public byte[] PasswordSalt { get; set; }
         [Required]
-        public string Role { get; set; } = "ordinary";
+        public string Role { get; set; } = "Member";
         public string RefreshToken { get; set; } = string.Empty;
         public DateTime TokenCreated { get; set; }
         public DateTime TokenExpires { get; set; }

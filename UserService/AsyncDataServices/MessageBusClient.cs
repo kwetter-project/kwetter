@@ -20,7 +20,7 @@ namespace UserService.AsyncDataServices
             {
                 _connection = factory.CreateConnection();
                 _channel = _connection.CreateModel();
-                _channel.ExchangeDeclare("user_exchange", ExchangeType.Direct);
+                _channel.ExchangeDeclare(exchange: "user_exchange", type: ExchangeType.Fanout);
 
 
                 _connection.ConnectionShutdown += RabbitMQ_ConnectionShutdown;
@@ -35,7 +35,7 @@ namespace UserService.AsyncDataServices
         private void SendMessage(string message)
         {
             var body = Encoding.UTF8.GetBytes(message);
-            _channel.BasicPublish(exchange: "user_exchange", routingKey: "user_deletion", basicProperties: null, body: body);
+            _channel.BasicPublish(exchange: "user_exchange", routingKey: "", basicProperties: null, body: body);
             Console.WriteLine($"--> We have sent {message}");
         }
         public void Dispose()

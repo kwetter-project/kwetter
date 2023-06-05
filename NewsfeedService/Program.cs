@@ -2,7 +2,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-//using NewsFeedService.AsyncDataServices;
+using NewsFeedService.AsyncDataServices;
 using NewsFeedService.Data;
 using NewsFeedService.EventProcessing;
 
@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<INewsFeedRepo, NewsFeedRepo>();
 builder.Services.AddControllers();
-//builder.Services.AddHostedService<MessageBusSubscriber>();
+builder.Services.AddHostedService<MessageBusSubscriber>();
 builder.Services.AddSingleton<IEventProcessor, EventProcessor>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
