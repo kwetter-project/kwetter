@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mssql-newsfeed-depl
+  name: mssql-user-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mssql-newsfeed
+      app: mssql-user
   template:
     metadata:
       labels:
-        app: mssql-newsfeed
+        app: mssql-user
     spec:
       containers:
-        - name: mssql-newsfeed
+        - name: mssql-user
           image: mcr.microsoft.com/mssql/server:2017-latest
           ports: 
-            - containerPort: 1434
+            - containerPort: 1435
           env:
             - name: MSSQL_PID
               value: "Express"
@@ -28,38 +28,38 @@ spec:
                   name: mssql
                   key: SA_PASSWORD
             - name: MSSQL_TCP_PORT
-              value: "1434" 
+              value: "1435" 
           volumeMounts:
             - mountPath: /var/opt/mssql/data
-              name: mssqldb-newsfeed
+              name: mssqldb-user
       volumes:
-        - name: mssqldb-newsfeed
+        - name: mssqldb-user
           persistentVolumeClaim: 
-            claimName: mssql-claim-newsfeed
+            claimName: mssql-claim-user
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mssql-clusterip-srv-newsfeed
+  name: mssql-clusterip-srv-user
 spec:
   type: ClusterIP
   selector:
-    app: mssql-newsfeed
+    app: mssql-user
   ports:
     - name: mssql
       protocol: TCP
-      port: 1434
-      targetPort: 1434
+      port: 1435
+      targetPort: 1435
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mssql-loadbalancer-newsfeed
+  name: mssql-loadbalancer-user
 spec:
   type: LoadBalancer
   selector:
-    app: mssql-newsfeed
+    app: mssql-user
   ports:
     - protocol: TCP
-      port: 1434
-      targetPort: 1434
+      port: 1435
+      targetPort: 1435

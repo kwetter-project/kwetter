@@ -33,6 +33,8 @@ if (builder.Environment.IsDevelopment())
 {
     Console.WriteLine("--> Using InMem DB");
     builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
+    // Console.WriteLine("--> Using SQL DB");
+    // builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("NewsfeedConn")));
 }
 else
 {

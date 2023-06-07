@@ -6,7 +6,7 @@ using NewsFeedService.Dtos;
 
 namespace NewsFeedService.Controllersctl
 {
-    [Route("api/[controller]/tw")]
+    [Route("api/nf/[controller]")]
     [ApiController]
     [Authorize]
     public class TweetController : ControllerBase

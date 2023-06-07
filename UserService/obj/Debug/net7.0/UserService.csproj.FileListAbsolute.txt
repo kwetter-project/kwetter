@@ -82,3 +82,4 @@ D:\kwetter\userservice\bin\Debug\net7.0\Humanizer.dll
 D:\kwetter\userservice\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
 D:\kwetter\userservice\bin\Debug\net7.0\Mono.TextTemplating.dll
 D:\kwetter\userservice\bin\Debug\net7.0\System.CodeDom.dll
+D:\kwetter\userservice\bin\Debug\net7.0\appsettings.Production.json

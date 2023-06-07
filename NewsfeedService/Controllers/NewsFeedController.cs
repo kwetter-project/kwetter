@@ -7,7 +7,7 @@ using NewsFeedService.Models;
 
 namespace NewsFeedService.Controllers
 {
-    [Route("api/[controller]/nf")]
+    [Route("api/nf/[controller]")]
     [ApiController]
     [Authorize]
     public class NewsFeedController : ControllerBase

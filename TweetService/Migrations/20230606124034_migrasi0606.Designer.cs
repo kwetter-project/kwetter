@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NewsFeedService.Data;
+using TweetService.Data;
 
 #nullable disable
 
-namespace NewsFeedService.Migrations
+namespace TweetService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230606124034_migrasi0606")]
+    partial class migrasi0606
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace NewsFeedService.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("NewsFeedService.Models.Follower", b =>
+            modelBuilder.Entity("TweetService.Models.Like", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,29 +33,11 @@ namespace NewsFeedService.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("FolloweeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FollowerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Followers");
-                });
-
-            modelBuilder.Entity("NewsFeedService.Models.NewsFeed", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("TweetId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -60,10 +45,10 @@ namespace NewsFeedService.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("NewsFeeds");
+                    b.ToTable("Likes");
                 });
 
-            modelBuilder.Entity("NewsFeedService.Models.Tweet", b =>
+            modelBuilder.Entity("TweetService.Models.Tweet", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -79,9 +64,6 @@ namespace NewsFeedService.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Like")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("NewsFeedId")
                         .HasColumnType("int");
 
                     b.Property<int>("Reply")
@@ -100,21 +82,7 @@ namespace NewsFeedService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NewsFeedId");
-
                     b.ToTable("Tweets");
-                });
-
-            modelBuilder.Entity("NewsFeedService.Models.Tweet", b =>
-                {
-                    b.HasOne("NewsFeedService.Models.NewsFeed", null)
-                        .WithMany("Tweets")
-                        .HasForeignKey("NewsFeedId");
-                });
-
-            modelBuilder.Entity("NewsFeedService.Models.NewsFeed", b =>
-                {
-                    b.Navigation("Tweets");
                 });
 #pragma warning restore 612, 618
         }

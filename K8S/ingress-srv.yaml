@@ -7,20 +7,26 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-    - host: kwetter.com
-      http:
-        paths:
-          - path: /api/tweet
-            pathType: Prefix
-            backend:
-              service:
-                name: tweets-clusterip-srv
-                port:
-                  number: 80
-          - path: /api/ut/tweet
-            pathType: Prefix
-            backend:
-              service:
-                name: newsfeed-clusterip-srv
-                port:
-                  number: 80
+  - http:
+      paths:
+        - path: /api/tweet
+          pathType: Prefix
+          backend:
+            service:
+              name: tweets-clusterip-srv
+              port:
+                number: 80
+        - path: /api/nf
+          pathType: Prefix
+          backend:
+            service:
+              name: newsfeed-clusterip-srv
+              port:
+                number: 80
+        - path: /api/auth
+          pathType: Prefix
+          backend:
+            service:
+              name: user-clusterip-srv
+              port:
+                number: 80
