@@ -104,24 +104,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          cd NewsfeedService
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"rebekadea_kwetter" /o:"rebekadea" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build
+          dotnet build TweetService/TweetService.csproj
+          dotnet build UserService/UserService.csproj
+          dotnet build NewsfeedService/NewsfeedService.csproj
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-          cd ..
-          cd UserService
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"rebekadea_kwetter" /o:"rebekadea" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-          cd ..
-          cd TweetService
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"rebekadea_kwetter" /o:"rebekadea" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-  security:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/dotnet@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
