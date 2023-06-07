@@ -99,4 +99,5 @@ jobs:
           dotnet build TweetService/TweetService.csproj
           dotnet build UserService/UserService.csproj
           dotnet build NewsfeedService/NewsfeedService.csproj
+          dotnet build UserService.Test/unittest
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
