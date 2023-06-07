@@ -58,15 +58,11 @@ jobs:
         working-directory: TweetService
         run: dotnet build --configuration Release --no-restore
 
-  security-tweet:
+  security:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - uses: snyk/actions/setup@master
-      - name: Restore dependencies
-        run: dotnet restore TweetService/TweetService.csproj
-      - name: navigate to working directory
-        run: cd TweetService
       - name: Snyk test
         run: snyk test --all-projects
         env:
