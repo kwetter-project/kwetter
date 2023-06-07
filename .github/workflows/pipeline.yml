@@ -95,9 +95,22 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
+          dotnet tool install --global dotnet-coverage
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"rebekadea_kwetter" /o:"rebekadea" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build TweetService/TweetService.csproj
           dotnet build UserService/UserService.csproj
           dotnet build NewsfeedService/NewsfeedService.csproj
-          dotnet build UserService.Test/unittest
+          dotnet-coverage collect "dotnet test UserService.Test/unittest" -f xml -o "coverage.xml"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+  security-tweet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Restore dependencies
+        run: dotnet restore TweetService/TweetService.csproj
+      - name: navigate to working directory
+        run: cd TweetService
+      - name: Snyk Action
+        uses: snyk/actions/dotnet@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
