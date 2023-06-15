@@ -5,6 +5,9 @@ using Microsoft.IdentityModel.Tokens;
 using TweetService.AsyncDataServices;
 using TweetService.Data;
 using TweetService.EventProcessing;
+using k8s;
+using k8s.Models;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +33,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateAudience = false
     };
 });
-
+// if (builder.Configuration.GetSection("AppSettings:Token").Value != null)
+// {
+//     Console.WriteLine(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value));
+// }
 
 if (builder.Environment.IsDevelopment())
 {

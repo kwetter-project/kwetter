@@ -7,6 +7,7 @@ namespace NewsFeedService.Data
     {
         public static void PrepPopulation(IApplicationBuilder app, bool isProd)
         {
+            //isProd = true;
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>(), isProd);
@@ -14,7 +15,6 @@ namespace NewsFeedService.Data
         }
         private static void SeedData(AppDbContext context, bool isProd)
         {
-            //isProd = true;
             if (isProd)
             {
                 Console.WriteLine("--> Attempting to apply migration...");

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NewsFeedService.Data;
 using NewsFeedService.Dtos;
 using NewsFeedService.Models;
+using System.Security.Claims;
 
 namespace NewsFeedService.Controllers
 {
@@ -41,10 +42,14 @@ namespace NewsFeedService.Controllers
             return Ok(newsfeed);
         }
         [HttpPost("follow")] // id = userID
-        public ActionResult<string> Follow(string username)
+        public ActionResult<string> Follow([FromForm] string username)
         {
             Console.WriteLine($"--> Follow");
-            _repository.CreateNewsFeed(username);
+            var user = User.FindFirst(ClaimTypes.Name)?.Value;
+            var newFollow = new Follower();
+            newFollow.FolloweeName = username;
+            newFollow.FollowerName = user;
+            _repository.CreateFollow(newFollow);
             _repository.SaveChanges();
 
             return Ok();

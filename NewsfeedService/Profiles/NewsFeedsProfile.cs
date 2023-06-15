@@ -9,6 +9,8 @@ namespace NewsFeedService.Profiles
         {
             //Source -> Target
             CreateMap<Tweet, TweetReadDto>();
+            CreateMap<TweetPublishedDto, TweetCreateDto>();
+            CreateMap<Tweet, TweetCreateDto>();
             CreateMap<NewsFeedCreateDto, NewsFeed>();
             CreateMap<NewsFeed, NewsFeedReadDto>();
             CreateMap<Tweet, TweetDto>();

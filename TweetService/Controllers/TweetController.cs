@@ -10,7 +10,7 @@ namespace TweetService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    // [Authorize]
     public class TweetController : Microsoft.AspNetCore.Mvc.ControllerBase
     {
         private readonly ITweetRepo _repository;

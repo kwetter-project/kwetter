@@ -4,11 +4,10 @@ metadata:
   name: mssql-claim
 spec:
   accessModes:
-    - ReadWriteMany
-  storageClassName: managed-csi
+    - ReadWriteOnce
   resources:
     requests:
-      storage: 200Mi
+      storage: 100Mi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -16,11 +15,10 @@ metadata:
   name: mssql-claim-newsfeed
 spec:
   accessModes:
-    - ReadWriteMany
-  storageClassName: managed-csi
+    - ReadWriteOnce
   resources:
     requests:
-      storage: 200Mi
+      storage: 100Mi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -28,9 +26,32 @@ metadata:
   name: mssql-claim-user
 spec:
   accessModes:
-    - ReadWriteMany
-  storageClassName: managed-csi
+    - ReadWriteOnce
   resources:
     requests:
-      storage: 200Mi
+      storage: 100Mi
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: mssql-claim-newsfeed
+# spec:
+#   accessModes:
+#     - ReadWriteMany
+#   storageClassName: managed-csi
+#   resources:
+#     requests:
+#       storage: 200Mi
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: mssql-claim-user
+# spec:
+#   accessModes:
+#     - ReadWriteMany
+#   storageClassName: managed-csi
+#   resources:
+#     requests:
+#       storage: 200Mi
 

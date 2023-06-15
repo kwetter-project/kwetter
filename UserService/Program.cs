@@ -6,6 +6,8 @@ using Microsoft.OpenApi.Models;
 using UserService.Data;
 using Microsoft.EntityFrameworkCore;
 using UserService.AsyncDataServices;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +27,13 @@ if (builder.Environment.IsDevelopment())
 else
 {
     Console.WriteLine("--> Using SQL DB");
-    builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("UsersConn")));
+    builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("UserConn")));
+    // string keyVaultUrl = "https://kwetter1.vault.azure.net/";
+    // string secretName = "uscs";
+    // var client = new SecretClient(new Uri(keyVaultUrl), new DefaultAzureCredential());
+    // KeyVaultSecret secret = client.GetSecret(secretName);
+    // string connectionString = secret.Value;
+    // builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(connectionString));
 }
 
 builder.Services.AddSwaggerGen(options =>

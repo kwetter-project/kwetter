@@ -58,6 +58,51 @@ jobs:
         working-directory: TweetService
         run: dotnet build --configuration Release --no-restore
 
+  analyze:
+    name: Build and analyze
+    runs-on: windows-latest
+    steps:
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: "zulu" # Alternative distribution options are available.
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+          path: ~\sonar\cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache SonarCloud scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v3
+        with:
+          path: .\.sonar\scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
+      - name: Install SonarCloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        shell: powershell
+        run: |
+          New-Item -Path .\.sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        shell: powershell
+        run: |
+          dotnet tool install --global dotnet-coverage
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"rebekadea_kwetter" /o:"rebekadea" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet build TweetService/TweetService.csproj
+          dotnet build UserService/UserService.csproj
+          dotnet build NewsfeedService/NewsfeedService.csproj
+          dotnet-coverage collect "dotnet test UserService.Test/unittest" -f xml -o "coverage.xml"
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
   security:
     runs-on: ubuntu-latest
     steps:
@@ -67,3 +112,53 @@ jobs:
         run: snyk test --all-projects
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+  push-to-dockerhub:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build and push docker images
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        shell: powershell
+        run: |
+          cd UserService
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/userservice .
+          docker push ${{ secrets.DOCKER_USERNAME }}/userservice
+          cd ..
+          cd NewsfeedService
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/newsfeedservice .
+          docker push ${{ secrets.DOCKER_USERNAME }}/newsfeedservice
+          cd ..
+          cd TweetService
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/tweetservice .
+          docker push ${{ secrets.DOCKER_USERNAME }}/tweetservice
+
+  deploy-to-aks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: Install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+      - name: Azure Login
+        env:
+          AZ_USERNAME: ${{ secrets.AZ_USERNAME }}
+          AZ_PASSWORD: ${{secrets.AZ_PASSWORD}}
+        shell: powershell
+        run: |
+          az login --username ${{ secrets.AZ_USERNAME }} --password ${{secrets.AZ_PASSWORD}}
+      - name: Deploy app
+        shell: powershell
+        run: |
+          kubectl rollout restart deployment tweets-depl
+          kubectl rollout restart deployment newsfeed-depl
+          kubectl rollout restart deployment user-depl

@@ -9,22 +9,22 @@ spec:
   rules:
   - http:
       paths:
-        - path: /api/tweet
-          pathType: Prefix
+        - path: /api/tweet/.*
+          pathType: ImplementationSpecific
           backend:
             service:
               name: tweets-clusterip-srv
               port:
                 number: 80
-        - path: /api/nf
-          pathType: Prefix
+        - path: /api/nf/.*
+          pathType: ImplementationSpecific
           backend:
             service:
               name: newsfeed-clusterip-srv
               port:
                 number: 80
-        - path: /api/auth
-          pathType: Prefix
+        - path: /api/auth/.*
+          pathType: ImplementationSpecific
           backend:
             service:
               name: user-clusterip-srv

@@ -62,10 +62,11 @@ namespace NewsFeedService.EventProcessing
             {
                 var repo = scope.ServiceProvider.GetRequiredService<INewsFeedRepo>();
                 var tweetPublishedDto = JsonSerializer.Deserialize<TweetPublishedDto>(tweetPublishedMessage);
+                var tweetCreateDto = _mapper.Map<TweetCreateDto>(tweetPublishedDto);
 
                 try
                 {
-                    var tweet = _mapper.Map<Tweet>(tweetPublishedDto);
+                    var tweet = _mapper.Map<Tweet>(tweetCreateDto);
                     repo.CreateTweet(tweet);
                     repo.SaveChanges();
                     Console.WriteLine("--> Tweet added!");

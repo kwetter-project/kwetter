@@ -80,3 +80,4 @@ D:\kwetter\newsfeedservice\obj\Debug\net7.0\NewsFeedService.pdb
 D:\kwetter\newsfeedservice\obj\Debug\net7.0\NewsFeedService.genruntimeconfig.cache
 D:\kwetter\newsfeedservice\obj\Debug\net7.0\ref\NewsFeedService.dll
 D:\kwetter\newsfeedservice\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\kwetter\newsfeedservice\bin\Debug\net7.0\Azure.Security.KeyVault.Secrets.dll

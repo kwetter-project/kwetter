@@ -31,7 +31,8 @@ namespace NewsFeedService.AsyncDataServices
             _connection = factory.CreateConnection();
             _Tweetchannel = _connection.CreateModel();
             _Userchannel = _connection.CreateModel();
-            //_Userchannel.ExchangeDeclare(exchange: "user_exchange", type: ExchangeType.Fanout);
+            _Userchannel.ExchangeDeclare(exchange: "user_exchange", type: ExchangeType.Fanout);
+            _Userchannel.ExchangeDeclare(exchange: "tweet_exchange", type: ExchangeType.Direct);
 
             _UserqueueName = "user_deletion_queue";
             _TweetqueueName = "tweet_creation_queue";
