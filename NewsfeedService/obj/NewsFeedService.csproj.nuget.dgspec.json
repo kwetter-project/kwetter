@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\kwetter\\newsfeedservice\\NewsFeedService.csproj": {}
+    "D:\\kwetter\\NewsfeedService\\NewsfeedService.csproj": {}
   },
   "projects": {
-    "D:\\kwetter\\newsfeedservice\\NewsFeedService.csproj": {
+    "D:\\kwetter\\NewsfeedService\\NewsfeedService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\kwetter\\newsfeedservice\\NewsFeedService.csproj",
-        "projectName": "NewsFeedService",
-        "projectPath": "D:\\kwetter\\newsfeedservice\\NewsFeedService.csproj",
+        "projectUniqueName": "D:\\kwetter\\NewsfeedService\\NewsfeedService.csproj",
+        "projectName": "NewsfeedService",
+        "projectPath": "D:\\kwetter\\NewsfeedService\\NewsfeedService.csproj",
         "packagesPath": "C:\\Users\\dea\\.nuget\\packages\\",
-        "outputPath": "D:\\kwetter\\newsfeedservice\\obj\\",
+        "outputPath": "D:\\kwetter\\NewsfeedService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -88,6 +88,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
+            },
+            "prometheus-net.AspNetCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [

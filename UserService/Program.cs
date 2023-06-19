@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using UserService.Data;
 using Microsoft.EntityFrameworkCore;
 using UserService.AsyncDataServices;
+using Prometheus;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 
@@ -68,14 +69,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseRouting();
+app.UseHttpMetrics();
+
 
 app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapMetrics();
 PrepDb.PrepPopulation(app, app.Environment.IsProduction());
 
 app.Run();

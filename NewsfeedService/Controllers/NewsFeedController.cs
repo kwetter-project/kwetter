@@ -14,12 +14,12 @@ namespace NewsFeedService.Controllers
     public class NewsFeedController : ControllerBase
     {
         private readonly INewsFeedRepo _repository;
-        private readonly IMapper _mapper;
+        //private readonly IMapper _mapper;
 
-        public NewsFeedController(INewsFeedRepo repository, IMapper mapper)
+        public NewsFeedController(INewsFeedRepo repository)
         {
             _repository = repository;
-            _mapper = mapper;
+            //_mapper = mapper;
         }
         [HttpGet("{id}", Name = "GetNewsfeedByUser")]
         public ActionResult<NewsFeed> GetNewsfeedByUser(string id)

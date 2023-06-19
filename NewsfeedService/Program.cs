@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using NewsFeedService.AsyncDataServices;
 using NewsFeedService.Data;
 using NewsFeedService.EventProcessing;
+using Prometheus;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 
@@ -54,11 +55,14 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
+app.UseRouting();
+app.UseHttpMetrics();
 
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapMetrics();
 
 PrepDb.PrepPopulation(app, app.Environment.IsProduction());
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yIn5tNT7lcb6LL2Cr2iNhZ2xxCgUzQZF6gyhugScw5MXqzbjZ/zng4cz9Gpf3BHrLQ4C+Oy2RKitdJP/nHxCTQ==",
+  "dgSpecHash": "v2VMaHu3RA+Pb+AdGltAsoSzi4BQdjQEnLFa46gmnReLeZh7w/7V8mrS8ZJcxhSoujjfvSiJw3PdPt2VLVw6Zg==",
   "success": true,
-  "projectFilePath": "D:\\kwetter\\tweetservice\\TweetService.csproj",
+  "projectFilePath": "D:\\kwetter\\TweetService\\TweetService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dea\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
@@ -65,6 +65,7 @@
     "C:\\Users\\dea\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\newtonsoft.json\\5.0.8\\newtonsoft.json.5.0.8.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\prometheus-net\\8.0.0\\prometheus-net.8.0.0.nupkg.sha512",
+    "C:\\Users\\dea\\.nuget\\packages\\prometheus-net.aspnetcore\\8.0.0\\prometheus-net.aspnetcore.8.0.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\rabbitmq.client\\6.5.0\\rabbitmq.client.6.5.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",

@@ -119,7 +119,7 @@ namespace UserService.Controllers
                 Console.WriteLine($"--> Could not send asynchronously: {ex.Message}");
             }
 
-            return Ok("User deleted");
+            return NoContent();
         }
 
         [HttpPost("logout")]
@@ -216,6 +216,8 @@ namespace UserService.Controllers
                 signingCredentials: creds
             );
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+            Console.Write("KEY CONF: ");
+            Console.WriteLine(_configuration.GetSection("AppSettings:Token").Value);
             return jwt;
         }
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

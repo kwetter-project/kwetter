@@ -3,7 +3,7 @@ name: kwetter
 on: [push]
 
 jobs:
-  build-newsfeed:
+  build-and-test-newsfeed-service:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,8 +20,11 @@ jobs:
         run: |
           cd NewsfeedService
           dotnet build --configuration Release --no-restore
+      - name: Test
+        working-directory: Newsfeed.Test/unittest
+        run: dotnet test --no-restore --verbosity normal
 
-  build-user:
+  build-and-test-user-service:
     runs-on: ubuntu-latest
 
     steps:
@@ -42,7 +45,7 @@ jobs:
         working-directory: UserService.Test/unittest
         run: dotnet test --no-restore --verbosity normal
 
-  build-tweet:
+  build-and-test-tweet-service:
     runs-on: ubuntu-latest
 
     steps:
@@ -57,6 +60,9 @@ jobs:
       - name: Build
         working-directory: TweetService
         run: dotnet build --configuration Release --no-restore
+      - name: Test
+        working-directory: TweetService.Test/unittest
+        run: dotnet test --no-restore --verbosity normal
 
   analyze:
     name: Build and analyze
@@ -146,22 +152,22 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USERNAME }}/tweetservice .
           docker push ${{ secrets.DOCKER_USERNAME }}/tweetservice
 
-  deploy-to-aks:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out the repo
-        uses: actions/checkout@v3
-      - name: Install Azure CLI
-        run: |
-          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-      - name: Azure Login
-        env:
-          AZ_USERNAME: ${{ secrets.AZ_USERNAME }}
-          AZ_PASSWORD: ${{secrets.AZ_PASSWORD}}
-        run: |
-          az login --username ${{ secrets.AZ_USERNAME }} --password ${{secrets.AZ_PASSWORD}}
-      - name: Deploy app
-        run: |
-          kubectl rollout restart deployment tweets-depl
-          kubectl rollout restart deployment newsfeed-depl
-          kubectl rollout restart deployment user-depl
+  # deploy-to-aks:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Check out the repo
+  #       uses: actions/checkout@v3
+  #     - name: Install Azure CLI
+  #       run: |
+  #         curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+  #     - name: Azure Login
+  #       env:
+  #         AZ_USERNAME: secrets.AZ_USERNAME
+  #         AZ_PASSWORD: secrets.AZ_PASSWORD
+  #       run: |
+  #         az login --username secrets.AZ_USERNAME  --password secrets.AZ_PASSWORD
+  #     - name: Deploy app
+  #       run: |
+  #         kubectl rollout restart deployment tweets-depl
+  #         kubectl rollout restart deployment newsfeed-depl
+  #         kubectl rollout restart deployment user-depl

@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "WQKs3r3EYF9jGvQqBfzIfKi38GqjpEu62JIDQ8+yc8A=",
-  "Source": "NewsFeedService",
-  "BasePath": "_content/NewsFeedService",
+  "Hash": "Bnor3jBMkcyoD6pn6KSmrcGE9ASkg20+gM4VfFtbirg=",
+  "Source": "NewsfeedService",
+  "BasePath": "_content/NewsfeedService",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

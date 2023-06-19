@@ -84,3 +84,5 @@ D:\kwetter\userservice\bin\Debug\net7.0\Mono.TextTemplating.dll
 D:\kwetter\userservice\bin\Debug\net7.0\System.CodeDom.dll
 D:\kwetter\userservice\bin\Debug\net7.0\appsettings.Production.json
 D:\kwetter\userservice\bin\Debug\net7.0\Azure.Security.KeyVault.Secrets.dll
+D:\kwetter\userservice\bin\Debug\net7.0\Prometheus.NetStandard.dll
+D:\kwetter\userservice\bin\Debug\net7.0\Prometheus.AspNetCore.dll

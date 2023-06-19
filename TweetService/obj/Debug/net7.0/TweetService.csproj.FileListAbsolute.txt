@@ -133,3 +133,4 @@ D:\kwetter\tweetservice\bin\Debug\net7.0\KubernetesClient.Basic.dll
 D:\kwetter\tweetservice\bin\Debug\net7.0\KubernetesClient.Models.dll
 D:\kwetter\tweetservice\bin\Debug\net7.0\Prometheus.NetStandard.dll
 D:\kwetter\tweetservice\bin\Debug\net7.0\YamlDotNet.dll
+D:\kwetter\tweetservice\bin\Debug\net7.0\Prometheus.AspNetCore.dll

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "dvs3d8RJ+tUeMAotuqQNZcQsM4REN+PjECRE6/alJrXWD4+oNJscYwxC+Xz2uZ8w5YJAxdGT6qgu9CVvugcNOg==",
+  "dgSpecHash": "HwRIcernXCu4iVKj56eMlOQpTNQo3gDSzv871D4VWnYEvMBwNItoVi+wYZSIFUK/HDCBoU6WUWRVQBu6Z30GCg==",
   "success": true,
   "projectFilePath": "D:\\kwetter\\userservice\\UserService.csproj",
   "expectedPackageFiles": [
@@ -30,8 +30,10 @@
     "C:\\Users\\dea\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\microsoft.extensions.dependencymodel\\7.0.0\\microsoft.extensions.dependencymodel.7.0.0.nupkg.sha512",
+    "C:\\Users\\dea\\.nuget\\packages\\microsoft.extensions.http\\3.1.0\\microsoft.extensions.http.3.1.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\microsoft.extensions.logging\\7.0.0\\microsoft.extensions.logging.7.0.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\dea\\.nuget\\packages\\microsoft.extensions.objectpool\\7.0.0\\microsoft.extensions.objectpool.7.0.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\microsoft.identity.client\\4.49.1\\microsoft.identity.client.4.49.1.nupkg.sha512",
@@ -49,6 +51,8 @@
     "C:\\Users\\dea\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\dea\\.nuget\\packages\\prometheus-net\\8.0.0\\prometheus-net.8.0.0.nupkg.sha512",
+    "C:\\Users\\dea\\.nuget\\packages\\prometheus-net.aspnetcore\\8.0.0\\prometheus-net.aspnetcore.8.0.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\rabbitmq.client\\6.5.0\\rabbitmq.client.6.5.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\scrutor\\3.3.0\\scrutor.3.3.0.nupkg.sha512",
     "C:\\Users\\dea\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",

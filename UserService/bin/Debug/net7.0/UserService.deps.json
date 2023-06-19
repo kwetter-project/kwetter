@@ -19,7 +19,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
           "RabbitMQ.Client": "6.5.0",
           "Swashbuckle.AspNetCore": "6.4.0",
-          "Swashbuckle.AspNetCore.Filters": "7.0.6"
+          "Swashbuckle.AspNetCore.Filters": "7.0.6",
+          "prometheus-net.AspNetCore": "8.0.0"
         },
         "runtime": {
           "UserService.dll": {}
@@ -311,6 +312,13 @@
           }
         }
       },
+      "Microsoft.Extensions.Http/3.1.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
+          "Microsoft.Extensions.Logging": "7.0.0",
+          "Microsoft.Extensions.Options": "7.0.0"
+        }
+      },
       "Microsoft.Extensions.Logging/7.0.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "7.0.0",
@@ -320,6 +328,7 @@
         }
       },
       "Microsoft.Extensions.Logging.Abstractions/7.0.0": {},
+      "Microsoft.Extensions.ObjectPool/7.0.0": {},
       "Microsoft.Extensions.Options/7.0.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
@@ -469,6 +478,29 @@
           "lib/netstandard2.0/Mono.TextTemplating.dll": {
             "assemblyVersion": "2.2.0.0",
             "fileVersion": "2.2.1.1"
+          }
+        }
+      },
+      "prometheus-net/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Http": "3.1.0",
+          "Microsoft.Extensions.ObjectPool": "7.0.0"
+        },
+        "runtime": {
+          "lib/net7.0/Prometheus.NetStandard.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.0.0"
+          }
+        }
+      },
+      "prometheus-net.AspNetCore/8.0.0": {
+        "dependencies": {
+          "prometheus-net": "8.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Prometheus.AspNetCore.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.0.0"
           }
         }
       },
@@ -979,6 +1011,13 @@
       "path": "microsoft.extensions.dependencymodel/7.0.0",
       "hashPath": "microsoft.extensions.dependencymodel.7.0.0.nupkg.sha512"
     },
+    "Microsoft.Extensions.Http/3.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DLigdcV0nYaT6/ly0rnfP80BnXq8NNd/h8/SkfY39uio7Bd9LauVntp6RcRh1Kj23N+uf80GgL7Win6P3BCtoQ==",
+      "path": "microsoft.extensions.http/3.1.0",
+      "hashPath": "microsoft.extensions.http.3.1.0.nupkg.sha512"
+    },
     "Microsoft.Extensions.Logging/7.0.0": {
       "type": "package",
       "serviceable": true,
@@ -992,6 +1031,13 @@
       "sha512": "sha512-kmn78+LPVMOWeITUjIlfxUPDsI0R6G0RkeAMBmQxAJ7vBJn4q2dTva7pWi65ceN5vPGjJ9q/Uae2WKgvfktJAw==",
       "path": "microsoft.extensions.logging.abstractions/7.0.0",
       "hashPath": "microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.ObjectPool/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-udvKco0sAVgYGTBnHUb0tY9JQzJ/nPDiv/8PIyz69wl1AibeCDZOLVVI+6156dPfHmJH7ws5oUJRiW4ZmAvuuA==",
+      "path": "microsoft.extensions.objectpool/7.0.0",
+      "hashPath": "microsoft.extensions.objectpool.7.0.0.nupkg.sha512"
     },
     "Microsoft.Extensions.Options/7.0.0": {
       "type": "package",
@@ -1111,6 +1157,20 @@
       "sha512": "sha512-KZYeKBET/2Z0gY1WlTAK7+RHTl7GSbtvTLDXEZZojUdAPqpQNDL6tHv7VUpqfX5VEOh+uRGKaZXkuD253nEOBQ==",
       "path": "mono.texttemplating/2.2.1",
       "hashPath": "mono.texttemplating.2.2.1.nupkg.sha512"
+    },
+    "prometheus-net/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tUz6ScbA4J193hT1xUxTXQuEAZj8b5YUUrdUVIEXb6yYOZZEvPzs4zqFqI2iJW6aLmldMEiUqCFq93EOLvqITA==",
+      "path": "prometheus-net/8.0.0",
+      "hashPath": "prometheus-net.8.0.0.nupkg.sha512"
+    },
+    "prometheus-net.AspNetCore/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-XNeeTpq9DMWOQC9t4yu4sYRE7WqRn9CrHi916gV8n4Zwe5kzFqGt5H2FnIm7LLGw2edndU2AtdlYs9bJ2AmVuQ==",
+      "path": "prometheus-net.aspnetcore/8.0.0",
+      "hashPath": "prometheus-net.aspnetcore.8.0.0.nupkg.sha512"
     },
     "RabbitMQ.Client/6.5.0": {
       "type": "package",

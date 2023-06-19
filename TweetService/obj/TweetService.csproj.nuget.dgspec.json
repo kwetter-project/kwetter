@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\kwetter\\tweetservice\\TweetService.csproj": {}
+    "D:\\kwetter\\TweetService\\TweetService.csproj": {}
   },
   "projects": {
-    "D:\\kwetter\\tweetservice\\TweetService.csproj": {
+    "D:\\kwetter\\TweetService\\TweetService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\kwetter\\tweetservice\\TweetService.csproj",
+        "projectUniqueName": "D:\\kwetter\\TweetService\\TweetService.csproj",
         "projectName": "TweetService",
-        "projectPath": "D:\\kwetter\\tweetservice\\TweetService.csproj",
+        "projectPath": "D:\\kwetter\\TweetService\\TweetService.csproj",
         "packagesPath": "C:\\Users\\dea\\.nuget\\packages\\",
-        "outputPath": "D:\\kwetter\\tweetservice\\obj\\",
+        "outputPath": "D:\\kwetter\\TweetService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -100,6 +100,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
+            },
+            "prometheus-net.AspNetCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [

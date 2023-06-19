@@ -63,5 +63,42 @@ namespace UserService.Data
         {
             return _context.Users.Any(p => p.Username == name);
         }
+
+        private string DetermineShardKey(string username)
+        {
+            // Define ranges and their corresponding shard keys
+            var range1 = new { Start = "A", End = "F", ShardKey = "Shard1" };
+            var range2 = new { Start = "G", End = "M", ShardKey = "Shard2" };
+            var range3 = new { Start = "N", End = "Z", ShardKey = "Shard3" };
+
+            // Determine the range based on the first character of the username
+            var firstChar = username.Substring(0, 1).ToUpper();
+
+            // Assign the corresponding shard key based on the range
+            var shardKey = string.Empty;
+            if (string.Compare(firstChar, range1.Start, StringComparison.OrdinalIgnoreCase) >= 0 &&
+                string.Compare(firstChar, range1.End, StringComparison.OrdinalIgnoreCase) <= 0)
+            {
+                shardKey = range1.ShardKey;
+            }
+            else if (string.Compare(firstChar, range2.Start, StringComparison.OrdinalIgnoreCase) >= 0 &&
+                     string.Compare(firstChar, range2.End, StringComparison.OrdinalIgnoreCase) <= 0)
+            {
+                shardKey = range2.ShardKey;
+            }
+            else if (string.Compare(firstChar, range3.Start, StringComparison.OrdinalIgnoreCase) >= 0 &&
+                     string.Compare(firstChar, range3.End, StringComparison.OrdinalIgnoreCase) <= 0)
+            {
+                shardKey = range3.ShardKey;
+            }
+            else
+            {
+                // Handle cases where the first character doesn't fall into any defined range
+                shardKey = "DefaultShard";
+            }
+
+            return shardKey;
+        }
+
     }
 }
