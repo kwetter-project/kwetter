@@ -11,17 +11,15 @@ namespace UserService.Data
         }
 
         public DbSet<User> Users { get; set; }
-        // protected override void OnModelCreating(ModelBuilder modelBuilder)
-        // {
-        //     modelBuilder.Entity<User>()
-        //         .HasKey(u => u.Username)
-        //         .IsClustered(false); // Disable clustered index on the primary key
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasKey(u => u.Username)
+                .IsClustered(false); // Disable clustered index on the primary key
 
-        //     modelBuilder.Entity<User>()
-        //         .HasIndex(u => u.ShardKey)
-        //         .IsClustered(true); // Enable clustered index on the shard key
-
-        //     // Other entity configurations
-        // }
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.ShardKey)
+                .IsClustered(true); // Enable clustered index on the shard key
+        }
     }
 }

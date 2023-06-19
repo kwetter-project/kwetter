@@ -17,12 +17,15 @@ namespace UserService.Data
             {
                 throw new ArgumentNullException(nameof(user));
             }
+            var shardKey = DetermineShardKey(user.Username);
+            user.ShardKey = shardKey;
             _context.Users.Add(user);
         }
 
         public void DeleteUser(string name)
         {
-            _context.Remove(_context.Users.Single(a => a.Username == name));
+            var shardKey = DetermineShardKey(name);
+            _context.Remove(_context.Users.Single(a => a.Username == name && a.ShardKey == shardKey));
         }
 
         public IEnumerable<User> GetAllUsers()
@@ -32,8 +35,9 @@ namespace UserService.Data
 
         public User GetUserById(string name)
         {
+            var shardKey = DetermineShardKey(name);
             return _context.Users.FirstOrDefault
-            (p => p.Username == name);
+            (p => p.Username == name && p.ShardKey == shardKey);
         }
 
         public bool SaveChanges()
@@ -43,12 +47,11 @@ namespace UserService.Data
 
         public void updatePassword(User user)
         {
-
+            var shardKey = DetermineShardKey(user.Username);
+            user.ShardKey = shardKey;
             _context.Users.Attach(user);
             var entry = _context.Users.Entry(user);
             entry.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-
-
         }
 
         public void updateUserToken(User user)
